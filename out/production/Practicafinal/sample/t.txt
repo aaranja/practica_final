@@ -1,0 +1,7 @@
+NOMBRE  CARBOHIDRATOS   PROTEINAS   GRASAS
+Jose    200g            98g         30g
+Kevin   150g            86g         60g
+Ramona  300g            65g         25g
+Ana     250g            54g         15g
+Daniel  158g            65g         11g
+Fabian  170g            70g         45g

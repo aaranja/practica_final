@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="fondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-image:url('fondo.jpg');" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <children>
+      <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="630.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="70.0">
+         <content>
+            <Pane fx:id="pane_errores" />
+         </content>
+      </ScrollPane>
+      <MenuBar style="-fx-background-color: white;" AnchorPane.bottomAnchor="575.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#abrir" text="Abrir" />
+                  <MenuItem mnemonicParsing="false" onAction="#guardarCambios" text="Guardar" />
+                  <MenuItem mnemonicParsing="false" onAction="#guardar" text="Guardar Como" />
+            </items>
+          </Menu>
+        </menus>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </MenuBar>
+      <TextArea fx:id="txtentrada" layoutX="20.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" style="-fx-text-fill: ORANGE; -fx-control-inner-background: BLACK;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="630.0" AnchorPane.topAnchor="70.0">
+         <font>
+            <Font name="Franklin Gothic Demi Cond" size="18.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></TextArea>
+      <Label text="Entrada" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="Franklin Gothic Demi Cond" size="36.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="ORANGE" />
+                  <Stop color="#42629626" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button fx:id="boton" layoutX="500.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#prueba" style="-fx-background-color: black;" text="Analizar" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="541.0">
+         <font>
+            <Font name="Franklin Gothic Demi Cond" size="12.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Button fx:id="limpiar_entrada" layoutX="70.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#limpiarEntrada" style="-fx-background-color: orange;" text="Limpiar" textFill="#f8f8f8" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="500.0">
+         <font>
+            <Font name="Franklin Gothic Demi Cond" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="630.0" layoutY="30.0" text="Salida" AnchorPane.leftAnchor="630.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="Franklin Gothic Demi Cond" size="36.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="GREEN" />
+                  <Stop color="#ffffff26" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </children>
+   <effect>
+      <Blend />
+   </effect>
+</AnchorPane>
