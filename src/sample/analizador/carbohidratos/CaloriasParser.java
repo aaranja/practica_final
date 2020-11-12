@@ -1,5 +1,5 @@
-// Generated from C:/Users/Balboa-PC/Documents/automatas I/Practicafinal/src/sample\Calculadora.g4 by ANTLR 4.8
-package sample;
+// Generated from Calorias.g4 by ANTLR 4.8
+package sample.analizador.carbohidratos;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class CalculadoraParser extends Parser {
+public class CaloriasParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -73,7 +73,7 @@ public class CalculadoraParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Calculadora.g4"; }
+	public String getGrammarFileName() { return "Calorias.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -84,7 +84,7 @@ public class CalculadoraParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public CalculadoraParser(TokenStream input) {
+	public CaloriasParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -105,7 +105,7 @@ public class CalculadoraParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_archivo; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculadoraVisitor ) return ((CalculadoraVisitor<? extends T>)visitor).visitArchivo(this);
+			if ( visitor instanceof CaloriasVisitor ) return ((CaloriasVisitor<? extends T>)visitor).visitArchivo(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -158,11 +158,11 @@ public class CalculadoraParser extends Parser {
 		}
 	}
 	public static class HeaderContext extends CabeceraContext {
-		public TerminalNode ID() { return getToken(CalculadoraParser.ID, 0); }
+		public TerminalNode ID() { return getToken(CaloriasParser.ID, 0); }
 		public HeaderContext(CabeceraContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculadoraVisitor ) return ((CalculadoraVisitor<? extends T>)visitor).visitHeader(this);
+			if ( visitor instanceof CaloriasVisitor ) return ((CaloriasVisitor<? extends T>)visitor).visitHeader(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -207,22 +207,22 @@ public class CalculadoraParser extends Parser {
 		}
 	}
 	public static class DatosContext extends PersonaContext {
-		public List<TerminalNode> ID() { return getTokens(CalculadoraParser.ID); }
+		public List<TerminalNode> ID() { return getTokens(CaloriasParser.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(CalculadoraParser.ID, i);
+			return getToken(CaloriasParser.ID, i);
 		}
-		public List<TerminalNode> NUM() { return getTokens(CalculadoraParser.NUM); }
+		public List<TerminalNode> NUM() { return getTokens(CaloriasParser.NUM); }
 		public TerminalNode NUM(int i) {
-			return getToken(CalculadoraParser.NUM, i);
+			return getToken(CaloriasParser.NUM, i);
 		}
-		public List<TerminalNode> GRAMOS() { return getTokens(CalculadoraParser.GRAMOS); }
+		public List<TerminalNode> GRAMOS() { return getTokens(CaloriasParser.GRAMOS); }
 		public TerminalNode GRAMOS(int i) {
-			return getToken(CalculadoraParser.GRAMOS, i);
+			return getToken(CaloriasParser.GRAMOS, i);
 		}
 		public DatosContext(PersonaContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculadoraVisitor ) return ((CalculadoraVisitor<? extends T>)visitor).visitDatos(this);
+			if ( visitor instanceof CaloriasVisitor ) return ((CaloriasVisitor<? extends T>)visitor).visitDatos(this);
 			else return visitor.visitChildren(this);
 		}
 	}

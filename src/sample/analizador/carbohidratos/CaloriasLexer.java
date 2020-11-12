@@ -1,5 +1,5 @@
-// Generated from C:/Users/Balboa-PC/Documents/automatas I/Practicafinal/src/sample\Calculadora.g4 by ANTLR 4.8
-package sample;
+// Generated from Calorias.g4 by ANTLR 4.8
+package sample.analizador.carbohidratos;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class CalculdoraLexer extends Lexer {
+public class CaloriasLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -79,13 +79,13 @@ public class CalculdoraLexer extends Lexer {
 	}
 
 
-	public CalculdoraLexer(CharStream input) {
+	public CaloriasLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Calculadora.g4"; }
+	public String getGrammarFileName() { return "Calorias.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

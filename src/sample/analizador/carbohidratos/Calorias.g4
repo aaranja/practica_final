@@ -1,4 +1,4 @@
-grammar Calculadora;
+grammar Calorias;
 
 archivo: cabecera persona+;
 

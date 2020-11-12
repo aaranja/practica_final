@@ -1,7 +1,8 @@
-package sample;
+package sample.analizador.carbohidratos;
 
-public class MyVisitor extends CalculadoraBaseVisitor {
-    @Override public String visitDatos(CalculadoraParser.DatosContext ctx)
+public class Visitante extends CaloriasBaseVisitor {
+
+    @Override public String visitDatos(CaloriasParser.DatosContext ctx)
     {
         int contador = 0;
         int pos = 1;
