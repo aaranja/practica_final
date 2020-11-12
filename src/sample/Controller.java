@@ -20,7 +20,7 @@ public class Controller {
     @FXML private TextArea txtsalida;
     @FXML private Pane pane;
     @FXML private Pane output_pane;
-    @FXML private ChoiceBox choice_grammar;
+    @FXML private ChoiceBox<String> choice_grammar;
     private SwingNode swingnode = new SwingNode();
     private SwingNode swingnode2 = new SwingNode();
     File seleccionado;
@@ -94,7 +94,7 @@ public class Controller {
     public void abrir (ActionEvent evento) throws IOException {
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File("c:\\"));
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("All Files", "*.*");
         fc.getExtensionFilters().add(filter);
         seleccionado = fc.showOpenDialog(null);
         if (seleccionado != null)

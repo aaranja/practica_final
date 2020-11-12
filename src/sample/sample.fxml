@@ -104,7 +104,7 @@
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="carbohidratos.Calorias" />
-               <String fx:value="promedios.Csv" />
+               <String fx:value="promedios.Calificaciones" />
             </FXCollections>
          </items>
       </ChoiceBox>
