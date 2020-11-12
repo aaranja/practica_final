@@ -1,80 +1,66 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import org.antlr.v4.gui.TreeViewer;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
 import javax.swing.*;
 import java.io.*;
-import java.util.Arrays;
+import sample.analizador.CargarGramatica;
 
 public class Controller {
 
     @FXML private TextArea txtentrada;
     @FXML private TextArea txtsalida;
     @FXML private Pane pane;
-    @FXML private Pane pane_errores;
+    @FXML private Pane output_pane;
+    @FXML private ChoiceBox choice_grammar;
     private SwingNode swingnode = new SwingNode();
     private SwingNode swingnode2 = new SwingNode();
     File seleccionado;
     String ruta;
+    String nombre_gramatica="carbohidratos.Calorias";
 
+    public void analizar (MouseEvent evento) throws IOException {
 
-    public void prueba (MouseEvent evento) throws IOException {
-        String entrada="\\t.txt";
+       String path_input=seleccionado.getPath();
         String frase=txtentrada.getText();
-        FileWriter escribir= new FileWriter(entrada);
+        FileWriter escribir= new FileWriter(path_input);
         for (int i=0;i<frase.length();i++){
             escribir.write(frase.charAt(i));}
         escribir.close();
 
-        CharStream input = CharStreams.fromFileName("\\t.txt");
-        CalculadoraLexer lexico = new CalculadoraLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexico);
-        CalculadoraParser sintactico = new CalculadoraParser(tokens);
-        ParseTree tree = sintactico.archivo();
-
-        MyVisitor visitas = new MyVisitor();
-        visitas.visit(tree);
-
+        // Se consegue la salida de la terminal
         JTextArea txtConsole = new JTextArea(200,40);
         PrintStream out = new PrintStream( new TextAreaOutputStream( txtConsole ) );
         System.setOut( out );
         System.setErr( out );
-        JPanel panelerr = new JPanel();
-        panelerr.setBounds(0,0,100,100);
-        panelerr.add(txtConsole);
 
-        swingnode2.setContent(panelerr);
-        if (pane_errores.getChildren().contains(swingnode2)){
-            pane_errores.getChildren().remove(swingnode2);
+        // Crear panel de salida
+        JPanel output = new JPanel();
+        output.setBounds(0,0,100,100);
+        output.add(txtConsole);
 
+        nombre_gramatica = choice_grammar.getValue().toString();
+
+       // Ejecutar la gramática indicada
+        CargarGramatica gramatica = new CargarGramatica();
+        gramatica.invocarClase(nombre_gramatica, "analizar", path_input);
+
+        // Verifica si el panel de javaFx esta vacío, remueve su contenido
+       if (!output_pane.getChildren().isEmpty()){
+            output_pane.getChildren().remove(swingnode2);
         }
-        pane_errores.getChildren().add(swingnode2);
 
-        /*TreeViewer tv = new TreeViewer(Arrays.asList(sintactico.getRuleNames()),tree);
-        JPanel panel = new JPanel();
-        panel.setBounds(0,0,100,100);
-        panel.add(tv);
-        panel.setVisible(true);
-        panel.updateUI();
-
-        swingnode.setContent(panel);
-        if (pane.getChildren().contains(swingnode)){
-            pane.getChildren().remove(swingnode);
-
-        }
-        pane.getChildren().add(swingnode);
-        txtsalida.setText(tree.toStringTree(sintactico));*/
+        // Carga el contenido en el panel de JavaFX
+        swingnode2.setContent(output);
+        output_pane.getChildren().add(swingnode2);
     }
 
     public void guardar (ActionEvent evento) throws IOException{
@@ -121,11 +107,8 @@ public class Controller {
                 c=entrada.read();
                 char letra = (char) c;
                 if (c!=-1 ){
-
                     frase=frase+letra;
                 }
-
-
             }
             entrada.close();
             txtentrada.setText(frase);
@@ -134,11 +117,8 @@ public class Controller {
 
     }
 
-    public void limpiarEntrada(MouseEvent evento)
-    {
+    public void limpiarEntrada(MouseEvent evento){
         txtentrada.setText("");
     }
-
-
 
 }

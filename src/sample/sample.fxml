@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -14,7 +16,7 @@
    <children>
       <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="630.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="70.0">
          <content>
-            <Pane fx:id="pane_errores" />
+            <Pane fx:id="output_pane" />
          </content>
       </ScrollPane>
       <MenuBar style="-fx-background-color: white;" AnchorPane.bottomAnchor="575.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -65,7 +67,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="boton" layoutX="500.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#prueba" style="-fx-background-color: black;" text="Analizar" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="541.0">
+      <Button fx:id="boton" layoutX="500.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#analizar" style="-fx-background-color: black;" text="Analizar" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="541.0">
          <font>
             <Font name="Franklin Gothic Demi Cond" size="12.0" />
          </font>
@@ -98,6 +100,14 @@
             </LinearGradient>
          </textFill>
       </Label>
+      <ChoiceBox fx:id="choice_grammar" layoutX="725.0" layoutY="541.0" prefWidth="150.0" value="carbohidratos.Calorias">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="carbohidratos.Calorias" />
+               <String fx:value="promedios.Csv" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
    </children>
    <effect>
       <Blend />
