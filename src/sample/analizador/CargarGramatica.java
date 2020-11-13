@@ -15,7 +15,7 @@ public class CargarGramatica extends ClassLoader {
             Constructor constructor = claseCargada.getConstructor();
             Object gramatica = constructor.newInstance();
 
-            // Conseguir el método
+            // Conseguir
             Method visita = claseCargada.getMethod(nombreMetodo,String.class);
             visita.invoke(gramatica, path);
         }catch (Exception a) {

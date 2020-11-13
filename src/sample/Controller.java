@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +23,7 @@ public class Controller {
     private SwingNode swingnode2 = new SwingNode();
     File seleccionado;
     String ruta;
-    String nombre_gramatica="carbohidratos.Calorias";
+    String nombre_gramatica="carbohidratos.Calorias"; // default
 
     public void analizar (MouseEvent evento) throws IOException {
 

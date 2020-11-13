@@ -1,15 +1,17 @@
 package sample.analizador.promedios;
-
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import java.nio.charset.StandardCharsets;
 
 public class Calificaciones {
     ParseTree arbol;
     public void analizar(String path){
         try{
-            CharStream input = CharStreams.fromFileName(path);
+
+            CharStream input = CharStreams.fromFileName(path, StandardCharsets.UTF_8);
+            System.out.println(input.toString());
             CsvLexer lexico = new CsvLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexico);
             CsvParser sintactico = new CsvParser(tokens);

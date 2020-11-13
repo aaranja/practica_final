@@ -31,7 +31,7 @@ public class Visitante extends CsvBaseVisitor {
 
                     campo = campo.replaceAll("^['\"]*", "").replaceAll("['\"]*$", "");
                     String[] alumno = campo.split(",", 9);
-
+                    // "1","nombre","cal"...
                     for(String a: alumno){
                         fila_alumno.add(a);
                     }
