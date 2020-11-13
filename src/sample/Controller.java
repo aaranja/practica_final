@@ -15,12 +15,9 @@ import sample.analizador.CargarGramatica;
 public class Controller {
 
     @FXML private TextArea txtentrada;
-    @FXML private TextArea txtsalida;
-    @FXML private Pane pane;
     @FXML private Pane output_pane;
     @FXML private ChoiceBox<String> choice_grammar;
-    private SwingNode swingnode = new SwingNode();
-    private SwingNode swingnode2 = new SwingNode();
+    private final SwingNode swingnode2 = new SwingNode();
     File seleccionado;
     String ruta;
     String nombre_gramatica="carbohidratos.Calorias"; // default
@@ -45,7 +42,7 @@ public class Controller {
         output.setBounds(0,0,100,100);
         output.add(txtConsole);
 
-        nombre_gramatica = choice_grammar.getValue().toString();
+        nombre_gramatica = choice_grammar.getValue();
 
        // Ejecutar la gramática indicada
         CargarGramatica gramatica = new CargarGramatica();
