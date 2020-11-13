@@ -11,7 +11,6 @@ public class Calificaciones {
         try{
 
             CharStream input = CharStreams.fromFileName(path, StandardCharsets.UTF_8);
-            System.out.println(input.toString());
             CsvLexer lexico = new CsvLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexico);
             CsvParser sintactico = new CsvParser(tokens);
