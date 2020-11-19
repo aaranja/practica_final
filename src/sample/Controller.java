@@ -15,16 +15,21 @@ import sample.analizador.CargarGramatica;
 public class Controller {
 
     @FXML private TextArea txtentrada;
+    @FXML private TextArea txtsalida;
+    @FXML private Pane pane;
     @FXML private Pane output_pane;
     @FXML private ChoiceBox<String> choice_grammar;
-    private final SwingNode swingnode2 = new SwingNode();
+    private SwingNode swingnode = new SwingNode();
+    private SwingNode swingnode2 = new SwingNode();
     File seleccionado;
+    File salida;
     String ruta;
     String nombre_gramatica="carbohidratos.Calorias"; // default
+    JTextArea txtConsole = new JTextArea(200,40);
 
     public void analizar (MouseEvent evento) throws IOException {
 
-       String path_input=seleccionado.getPath();
+        String path_input="t.expr";
         String frase=txtentrada.getText();
         FileWriter escribir= new FileWriter(path_input);
         for (int i=0;i<frase.length();i++){
@@ -32,7 +37,6 @@ public class Controller {
         escribir.close();
 
         // Se consegue la salida de la terminal
-        JTextArea txtConsole = new JTextArea(200,40);
         PrintStream out = new PrintStream( new TextAreaOutputStream( txtConsole ) );
         System.setOut( out );
         System.setErr( out );
@@ -42,7 +46,7 @@ public class Controller {
         output.setBounds(0,0,100,100);
         output.add(txtConsole);
 
-        nombre_gramatica = choice_grammar.getValue();
+        nombre_gramatica = choice_grammar.getValue().toString();
 
        // Ejecutar la gramática indicada
         CargarGramatica gramatica = new CargarGramatica();
@@ -56,22 +60,50 @@ public class Controller {
         // Carga el contenido en el panel de JavaFX
         swingnode2.setContent(output);
         output_pane.getChildren().add(swingnode2);
+
+
     }
 
     public void guardar (ActionEvent evento) throws IOException{
         if(seleccionado != null){
             FileChooser fc = new FileChooser();
-            fc.setInitialDirectory(new File("C:\\"));
+            fc.setInitialDirectory(new File("C:\\practicafinal"));
+            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
+            FileChooser.ExtensionFilter filter2 = new FileChooser.ExtensionFilter("Archivos (*.csv)","*.csv");
+            fc.getExtensionFilters().add(filter);
+            fc.getExtensionFilters().add(filter2);
+            File seleccionad = fc.showSaveDialog(null);
+            if (seleccionad!=null)
+            {
+                String salida = txtentrada.getText();
+                FileWriter escritura  = new FileWriter(seleccionad);
+                for(int i=0;i<salida.length();i++)
+                {
+                    escritura.write(salida.charAt(i));
+                }
+                escritura.close();
+            }
+        }
+    }
+
+    public void guardarSalida (ActionEvent evento) throws IOException{
+        if(!txtConsole.getText().equals("")){
+            FileChooser fc = new FileChooser();
+            fc.setInitialDirectory(new File("C:\\practicafinal"));
             FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
             fc.getExtensionFilters().add(filter);
-            File seleccionado = fc.showSaveDialog(null);
-            String salida = txtentrada.getText();
-            FileWriter escritura  = new FileWriter(seleccionado);
-            for(int i=0;i<salida.length();i++)
+            File seleccionad = fc.showSaveDialog(null);
+            if (seleccionad!=null)
             {
-                escritura.write(salida.charAt(i));
+                String salida = txtConsole.getText();
+                FileWriter escritura  = new FileWriter(seleccionad);
+                for(int i=0;i<salida.length();i++)
+                {
+                    escritura.write(salida.charAt(i));
+                }
+                escritura.close();
             }
-            escritura.close();
+
         }
     }
 
@@ -88,9 +120,11 @@ public class Controller {
 
     public void abrir (ActionEvent evento) throws IOException {
         FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File("c:\\"));
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("All Files", "*.*");
+        fc.setInitialDirectory(new File("c:\\practicafinal"));
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
+        FileChooser.ExtensionFilter filter2 = new FileChooser.ExtensionFilter("Archivos (*.csv)","*.csv");
         fc.getExtensionFilters().add(filter);
+        fc.getExtensionFilters().add(filter2);
         seleccionado = fc.showOpenDialog(null);
         if (seleccionado != null)
         {
