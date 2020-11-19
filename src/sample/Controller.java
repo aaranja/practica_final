@@ -105,7 +105,7 @@ public class Controller {
             }
 
         }
-    }
+    }//prueba 2
 
     public void guardarCambios (ActionEvent evento) throws IOException{
        if( seleccionado != null) {
