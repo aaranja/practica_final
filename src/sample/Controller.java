@@ -16,17 +16,17 @@ import java.util.regex.Pattern;
 import sample.analizador.CargarGramatica;
 
 public class Controller {
-
     @FXML private TextArea txtentrada;
     @FXML private TextArea txtsalida;
     @FXML private Pane pane;
     @FXML private Pane output_pane;
     @FXML private ChoiceBox<String> choice_grammar;
-    private SwingNode swingnode = new SwingNode();
-    private SwingNode swingnode2 = new SwingNode();
+    private final SwingNode swingnode = new SwingNode();
+    private final SwingNode swingnode2 = new SwingNode();
     File seleccionado;
     String nombre_gramatica="carbohidratos.Calorias"; // default
     JTextArea txtConsole = new JTextArea(200,40);
+    String folder_path = null;
 
     public void analizar (MouseEvent evento) throws IOException {
 
@@ -48,7 +48,7 @@ public class Controller {
         output.setBounds(0,0,100,100);
         output.add(txtConsole);
 
-        nombre_gramatica = choice_grammar.getValue().toString();
+        nombre_gramatica = choice_grammar.getValue();
 
         // Ejecutar la gramática indicada
         CargarGramatica gramatica = new CargarGramatica();
@@ -69,7 +69,7 @@ public class Controller {
     public void guardar (ActionEvent evento) throws IOException{
         if(seleccionado != null){
             FileChooser fc = new FileChooser();
-            fc.setInitialDirectory(new File("C:\\"));
+            fc.setInitialDirectory(new File(folder_path));
             FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
             FileChooser.ExtensionFilter filter2 = new FileChooser.ExtensionFilter("Archivos (*.csv)","*.csv");
             fc.getExtensionFilters().add(filter);
@@ -90,12 +90,12 @@ public class Controller {
 
     public void guardarSalida (ActionEvent evento) throws IOException{
        try{
+           FileChooser fc = new FileChooser();
+           fc.setInitialDirectory(new File(folder_path));
+
            if(!txtConsole.getText().equals("")){
-               switch (nombre_gramatica)
-               {
+               switch (nombre_gramatica) {
                    case "carbohidratos.Calorias":
-                       FileChooser fc = new FileChooser();
-                       fc.setInitialDirectory(new File("C:\\"));
                        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
                        fc.getExtensionFilters().add(filter);
                        File seleccionad = fc.showSaveDialog(null);
@@ -111,11 +111,9 @@ public class Controller {
                        }
                        break;
                    case "promedios.Calificaciones":
-                       FileChooser fc2 = new FileChooser();
-                       fc2.setInitialDirectory(new File("C:\\"));
                        FileChooser.ExtensionFilter filter2 = new FileChooser.ExtensionFilter("Archivos (*.csv)","*.csv");
-                       fc2.getExtensionFilters().add(filter2);
-                       File seleccionado = fc2.showSaveDialog(null);
+                       fc.getExtensionFilters().add(filter2);
+                       File seleccionado = fc.showSaveDialog(null);
                        if(seleccionado!=null) {
                            String salida = txtConsole.getText();
                            FileWriter escritura = new FileWriter(seleccionado);
@@ -166,13 +164,16 @@ public class Controller {
             fc.getExtensionFilters().add(filter);
             fc.getExtensionFilters().add(filter2);
             seleccionado = fc.showOpenDialog(null);
-            if (seleccionado != null)
-            {
-                FileReader entrada  = new FileReader(seleccionado.getAbsolutePath());
+            if (seleccionado != null) {
+                String pathFile = seleccionado.getAbsolutePath();
+                // get dynamic path
+                folder_path = pathFile.substring(0, pathFile.lastIndexOf('\\')+1);
+
+                // open file and get text data
+                FileReader entrada  = new FileReader(pathFile);
                 int c=0;
                 String frase="";
-                while(c!=-1)
-                {
+                while(c!=-1){
                     c=entrada.read();
                     char letra = (char) c;
                     if (c!=-1 ){
