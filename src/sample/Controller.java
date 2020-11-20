@@ -11,9 +11,9 @@ import javafx.stage.FileChooser;
 import javax.swing.*;
 import java.io.*;
 import sample.analizador.CargarGramatica;
+import java.util.Scanner;
 
 public class Controller {
-
     @FXML private TextArea txtentrada;
     @FXML private Pane output_pane;
     @FXML private ChoiceBox<String> choice_grammar;
