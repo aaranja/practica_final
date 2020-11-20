@@ -10,6 +10,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javax.swing.*;
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import sample.analizador.CargarGramatica;
 
 public class Controller {
@@ -22,13 +25,12 @@ public class Controller {
     private SwingNode swingnode = new SwingNode();
     private SwingNode swingnode2 = new SwingNode();
     File seleccionado;
-    File salida;
-    String ruta;
     String nombre_gramatica="carbohidratos.Calorias"; // default
     JTextArea txtConsole = new JTextArea(200,40);
 
     public void analizar (MouseEvent evento) throws IOException {
 
+        txtConsole.setText("");
         String path_input="t.expr";
         String frase=txtentrada.getText();
         FileWriter escribir= new FileWriter(path_input);
@@ -48,12 +50,12 @@ public class Controller {
 
         nombre_gramatica = choice_grammar.getValue().toString();
 
-       // Ejecutar la gramática indicada
+        // Ejecutar la gramática indicada
         CargarGramatica gramatica = new CargarGramatica();
         gramatica.invocarClase(nombre_gramatica, "analizar", path_input);
 
         // Verifica si el panel de javaFx esta vacío, remueve su contenido
-       if (!output_pane.getChildren().isEmpty()){
+        if (!output_pane.getChildren().isEmpty()){
             output_pane.getChildren().remove(swingnode2);
         }
 
@@ -88,21 +90,54 @@ public class Controller {
 
     public void guardarSalida (ActionEvent evento) throws IOException{
         if(!txtConsole.getText().equals("")){
-            FileChooser fc = new FileChooser();
-            fc.setInitialDirectory(new File("C:\\practicafinal"));
-            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
-            fc.getExtensionFilters().add(filter);
-            File seleccionad = fc.showSaveDialog(null);
-            if (seleccionad!=null)
-            {
-                String salida = txtConsole.getText();
-                FileWriter escritura  = new FileWriter(seleccionad);
-                for(int i=0;i<salida.length();i++)
-                {
-                    escritura.write(salida.charAt(i));
-                }
-                escritura.close();
-            }
+           switch (nombre_gramatica)
+           {
+               case "carbohidratos.Calorias":
+                   FileChooser fc = new FileChooser();
+                   fc.setInitialDirectory(new File("C:\\practicafinal"));
+                   FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
+                   fc.getExtensionFilters().add(filter);
+                   File seleccionad = fc.showSaveDialog(null);
+                   if (seleccionad!=null)
+                   {
+                       String salida = txtConsole.getText();
+                       FileWriter escritura  = new FileWriter(seleccionad);
+                       for(int i=0;i<salida.length();i++)
+                       {
+                           escritura.write(salida.charAt(i));
+                       }
+                       escritura.close();
+                   }
+                   break;
+               case "promedios.Calificaciones":
+                   FileChooser fc2 = new FileChooser();
+                   fc2.setInitialDirectory(new File("C:\\practicafinal"));
+                   FileChooser.ExtensionFilter filter2 = new FileChooser.ExtensionFilter("Archivos (*.csv)","*.csv");
+                   fc2.getExtensionFilters().add(filter2);
+                   File seleccionado = fc2.showSaveDialog(null);
+                   if(seleccionado!=null) {
+                       String salida = txtConsole.getText();
+                       FileWriter escritura = new FileWriter(seleccionado);
+
+                       escritura.write("Numero");
+                       escritura.write(",");
+                       escritura.write("Nombre de estudiante");
+                       escritura.write(",");
+                       escritura.write("Promedio \n");
+
+                       for (String fila : salida.split("\\n")) {
+
+                           int sad = fila.lastIndexOf(" ");
+                           String promedio = ",".concat(fila.substring(sad + 1));
+                           String nombre = fila.substring(0, sad);
+                           nombre = nombre.replace("] ", "],");
+                           String resultado = nombre.concat(promedio);
+                           escritura.write(resultado);
+                       }
+                       escritura.close();
+                   }
+                   break;
+           }
 
         }
     }//prueba 2

@@ -38,7 +38,7 @@ public class Visitante extends CsvBaseVisitor {
 
                     k++;
                     fila_alumno.remove(0);
-                    System.out.print("["+(k)+"] Alumno: "+fila_alumno.remove(0));
+                    System.out.print("["+(k)+"] "+fila_alumno.remove(0));
                     int j = 0;
                     Double promedio = 0.0;
                     while(j<porcentaje.size()){
@@ -51,7 +51,7 @@ public class Visitante extends CsvBaseVisitor {
                         promedio += i;
                         j++;
                     }
-                    System.out.println(", promedio: "+promedio);
+                    System.out.println(" "+promedio);
                 }
             }
         return null;
