@@ -37,22 +37,24 @@ public class Controller {
         nombre_gramatica = choice_grammar.getValue();
         CargarGramatica gramatica = new CargarGramatica();
         String salida_grammar = gramatica.invocarClase(nombre_gramatica, "analizar", path_input);
-        System.out.println(salida_grammar);
+        if(salida_grammar != null){
+            System.out.println(salida_grammar);
 
-        // Crear panel de salida
-        JPanel output = new JPanel();
-        output.setBounds(0,0,100,100);
-        txtConsole.setText(salida_grammar);
-        output.add(txtConsole);
+            // Crear panel de salida
+            JPanel output = new JPanel();
+            output.setBounds(0,0,100,100);
+            txtConsole.setText(salida_grammar);
+            output.add(txtConsole);
 
-        // Verifica si el panel de javaFx esta vacío, remueve su contenido
-        if (!output_pane.getChildren().isEmpty()){
-            output_pane.getChildren().remove(swingnode2);
+            // Verifica si el panel de javaFx esta vacío, remueve su contenido
+            if (!output_pane.getChildren().isEmpty()){
+                output_pane.getChildren().remove(swingnode2);
+            }
+
+            // Carga el contenido en el panel de JavaFX
+            swingnode2.setContent(output);
+            output_pane.getChildren().add(swingnode2);
         }
-
-        // Carga el contenido en el panel de JavaFX
-        swingnode2.setContent(output);
-        output_pane.getChildren().add(swingnode2);
     }
 
     public void guardar (ActionEvent evento) throws IOException{
