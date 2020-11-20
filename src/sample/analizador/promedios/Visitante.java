@@ -1,18 +1,11 @@
 package sample.analizador.promedios;
-
-import org.antlr.v4.runtime.tree.ParseTree;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Visitante extends CsvBaseVisitor {
 
     @Override
     public String visitArchivo(CsvParser.ArchivoContext ctx) {
-        // guardando cambios
+
         List<Double> porcentaje = new ArrayList<Double>();
 
         List<String> listCabecera = new ArrayList<>();
@@ -54,12 +47,12 @@ public class Visitante extends CsvBaseVisitor {
                 // sumar al promedio el porcentaje por la calificación
                 promedio += calNum*porcentaje.get(k);
                 k++;
-        }
+            }
             // imprimir resultado del alumno
             System.out.println(indice+" "+nombre+" "+promedio);
             fila_alumno.clear();
 
-            }
+        }
         return null;
     }
 
