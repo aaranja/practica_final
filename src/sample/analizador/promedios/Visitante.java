@@ -5,6 +5,7 @@ public class Visitante extends CsvBaseVisitor {
 
     @Override
     public String visitArchivo(CsvParser.ArchivoContext ctx) {
+        String resultado = "";
 
         List<Double> porcentaje = new ArrayList<Double>();
 
@@ -49,11 +50,13 @@ public class Visitante extends CsvBaseVisitor {
                 k++;
             }
             // imprimir resultado del alumno
-            System.out.println(indice+" "+nombre+" "+promedio);
+            resultado += (indice+" "+nombre+" "+promedio+"\n");
+            //System.out.println(indice+" "+nombre+" "+promedio);
             fila_alumno.clear();
 
         }
-        return null;
+
+        return resultado;
     }
 
 

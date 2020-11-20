@@ -10,18 +10,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javax.swing.*;
 import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.nio.charset.StandardCharsets;
 
 import sample.analizador.CargarGramatica;
 
 public class Controller {
     @FXML private TextArea txtentrada;
-    @FXML private TextArea txtsalida;
-    @FXML private Pane pane;
     @FXML private Pane output_pane;
     @FXML private ChoiceBox<String> choice_grammar;
-    private final SwingNode swingnode = new SwingNode();
     private final SwingNode swingnode2 = new SwingNode();
     File seleccionado;
     String nombre_gramatica="carbohidratos.Calorias"; // default
@@ -29,30 +25,25 @@ public class Controller {
     String folder_path = null;
 
     public void analizar (MouseEvent evento) throws IOException {
-
         txtConsole.setText("");
         String path_input="t.expr";
         String frase=txtentrada.getText();
-        FileWriter escribir= new FileWriter(path_input);
+        FileWriter escribir= new FileWriter(path_input, StandardCharsets.UTF_8);
         for (int i=0;i<frase.length();i++){
             escribir.write(frase.charAt(i));}
         escribir.close();
 
-        // Se consegue la salida de la terminal
-        PrintStream out = new PrintStream( new TextAreaOutputStream( txtConsole ) );
-        System.setOut( out );
-        System.setErr( out );
+        // Ejecutar la gramática indicada
+        nombre_gramatica = choice_grammar.getValue();
+        CargarGramatica gramatica = new CargarGramatica();
+        String salida_grammar = gramatica.invocarClase(nombre_gramatica, "analizar", path_input);
+        System.out.println(salida_grammar);
 
         // Crear panel de salida
         JPanel output = new JPanel();
         output.setBounds(0,0,100,100);
+        txtConsole.setText(salida_grammar);
         output.add(txtConsole);
-
-        nombre_gramatica = choice_grammar.getValue();
-
-        // Ejecutar la gramática indicada
-        CargarGramatica gramatica = new CargarGramatica();
-        gramatica.invocarClase(nombre_gramatica, "analizar", path_input);
 
         // Verifica si el panel de javaFx esta vacío, remueve su contenido
         if (!output_pane.getChildren().isEmpty()){
@@ -62,8 +53,6 @@ public class Controller {
         // Carga el contenido en el panel de JavaFX
         swingnode2.setContent(output);
         output_pane.getChildren().add(swingnode2);
-
-
     }
 
     public void guardar (ActionEvent evento) throws IOException{
@@ -170,7 +159,8 @@ public class Controller {
                 folder_path = pathFile.substring(0, pathFile.lastIndexOf('\\')+1);
 
                 // open file and get text data
-                FileReader entrada  = new FileReader(pathFile);
+
+                FileReader entrada  = new FileReader(pathFile, StandardCharsets.UTF_8);
                 int c=0;
                 String frase="";
                 while(c!=-1){

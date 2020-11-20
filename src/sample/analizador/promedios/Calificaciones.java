@@ -7,18 +7,19 @@ import java.nio.charset.StandardCharsets;
 
 public class Calificaciones {
     ParseTree arbol;
-    public void analizar(String path){
+    public String analizar(String path){
+        String salida = null;
         try{
-
             CharStream input = CharStreams.fromFileName(path, StandardCharsets.UTF_8);
             CsvLexer lexico = new CsvLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexico);
             CsvParser sintactico = new CsvParser(tokens);
             this.arbol = sintactico.archivo();
             sample.analizador.promedios.Visitante visitas = new Visitante();
-            visitas.visit(arbol);
+            salida = visitas.visit(arbol).toString();
         }catch(Exception e){
             System.out.println(e.toString());
         }
+        return salida;
     }
 }

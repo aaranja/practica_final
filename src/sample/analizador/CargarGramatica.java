@@ -5,7 +5,8 @@ import java.lang.reflect.Method;
 
 public class CargarGramatica extends ClassLoader {
     String path_class = "sample.analizador.";
-    public void invocarClase(String nombreClase, String nombreMetodo, String path){
+    public String invocarClase(String nombreClase, String nombreMetodo, String path){
+        String salida = null;
         try{
             // Conseguir la clase por el nombre y su package
             ClassLoader classLoader = this.getClass().getClassLoader();
@@ -17,10 +18,11 @@ public class CargarGramatica extends ClassLoader {
 
             // Conseguir
             Method visita = claseCargada.getMethod(nombreMetodo,String.class);
-            visita.invoke(gramatica, path);
+            salida = visita.invoke(gramatica, path).toString();
         }catch (Exception a) {
             a.printStackTrace();
         }
+        return salida;
     }
 
 }
