@@ -12,53 +12,47 @@ public class Visitante extends CsvBaseVisitor {
 
     @Override
     public String visitArchivo(CsvParser.ArchivoContext ctx) {
-        // guardando cambios
         List<Double> porcentaje = new ArrayList<Double>();
-
-        List<String> listCabecera = new ArrayList<>();
-        for(CsvParser.CampoContext campoCabecera : ctx.cabecera().fila().campo()){
-            listCabecera.add(campoCabecera.getText());
-        }
-        listCabecera.remove(0); // remover 'N'
-        listCabecera.remove(0); // remover 'nombre'
-
-        // conseguir porcentajes
-
-        for(String evaluacion : listCabecera){
-            // quitar comillas si el campo tiene ,
-            evaluacion = evaluacion.replace("\"", "");
-            // se consigue el porcentaje y remueve el char '%'
-            int index = evaluacion.lastIndexOf(" ");
-            evaluacion = evaluacion.substring(index+1).replace("%","");
-            // agregar el porcentaje a la lista
-            porcentaje.add(Double.parseDouble(evaluacion)/100);
-        }
-
-        // recorre la lista de filas del archivo
+        int k= 0;
         for (CsvParser.FilaContext filaContext : ctx.fila()) {
-            List<String> fila_alumno = new ArrayList<String>();
+                // Se buscan los porcentajes de los trabajos
+                String campo = filaContext.campo().get(0).getText();
+                Pattern pattern = Pattern.compile("%");
+                Matcher matcher = pattern.matcher(campo);
 
-            // recorre la lista de campos de la fila actual
-            for (CsvParser.CampoContext campoContext : filaContext.campo()){
-                fila_alumno.add(campoContext.getText());
-            }
+                // Si encuentra un porcentaje, lo gurda en una lista
+                if (matcher.find()){
+                    campo = campo.replaceAll("^['\"]*", "");
+                    campo = campo.split("%", 2)[0];
+                    porcentaje.add(Double.parseDouble(campo)/100);
+                }else{
+                    // Se buscarán los nombres y las calificaciones de los alumnos
+                    List<String> fila_alumno = new ArrayList<String>();
 
-            String indice = "["+fila_alumno.remove(0)+"]";
-            String nombre = fila_alumno.remove(0);
-            Double promedio = 0.0;
-            int k = 0;
-            for(String calificacion: fila_alumno){
-                calificacion = calificacion.replace("\"", "").replace(",",".");
-                calificacion = calificacion.equals("") ? "0.0" : calificacion;
-                Double calNum = Double.parseDouble(calificacion);
-                // sumar al promedio el porcentaje por la calificación
-                promedio += calNum*porcentaje.get(k);
-                k++;
-        }
-            // imprimir resultado del alumno
-            System.out.println(indice+" "+nombre+" "+promedio);
-            fila_alumno.clear();
+                    campo = campo.replaceAll("^['\"]*", "").replaceAll("['\"]*$", "");
+                    String[] alumno = campo.split(",", 9);
+                    // "1","nombre","cal"...
+                    for(String a: alumno){
+                        fila_alumno.add(a);
+                    }
 
+                    k++;
+                    fila_alumno.remove(0);
+                    System.out.print("["+(k)+"] "+fila_alumno.remove(0));
+                    int j = 0;
+                    Double promedio = 0.0;
+                    while(j<porcentaje.size()){
+                        String calf = fila_alumno.remove(0);
+                        if (calf.equals("")){
+                            calf="0";
+                        }
+                        Double i = Double.parseDouble(calf)*(porcentaje.get(j));
+                        //System.out.println(i);
+                        promedio += i;
+                        j++;
+                    }
+                    System.out.println(" "+promedio);
+                }
             }
         return null;
     }
