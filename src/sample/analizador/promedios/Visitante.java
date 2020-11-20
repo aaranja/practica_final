@@ -12,7 +12,7 @@ public class Visitante extends CsvBaseVisitor {
 
     @Override
     public String visitArchivo(CsvParser.ArchivoContext ctx) {
-
+        // guardando cambios
         List<Double> porcentaje = new ArrayList<Double>();
 
         List<String> listCabecera = new ArrayList<>();
