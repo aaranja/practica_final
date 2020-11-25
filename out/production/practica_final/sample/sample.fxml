@@ -28,7 +28,7 @@
                     <items>
                        <MenuItem mnemonicParsing="false" onAction="#analizar" text="carbohidratos.Calorias" />
                        <MenuItem mnemonicParsing="false" onAction="#analizar" text="promedios.Calificaciones" />
-
+                        <MenuItem mnemonicParsing="false" onAction="#analizar" text="nutricion.Alimentos" />
                     </items>
                   </Menu>
                  <MenuItem mnemonicParsing="false" onAction="#limpiarEntrada" text="Limpiar datos" />
