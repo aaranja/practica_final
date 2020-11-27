@@ -24,7 +24,7 @@ public class Controller {
     File seleccionado;
     String nombre_gramatica="carbohidratos.Calorias"; // default
     JTextArea txtConsole = new JTextArea(200,40);
-    String folder_path = null;
+    String folder_path = "c:\\";
 
     public void analizar (ActionEvent evento) throws IOException {
         txtConsole.setText("");
@@ -87,27 +87,11 @@ public class Controller {
 
            if(!txt_salida.getText().equals("")){
                switch (nombre_gramatica) {
-                   case "carbohidratos.Calorias":
-                       FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
-                       fc.getExtensionFilters().add(filter);
-                       File seleccionad = fc.showSaveDialog(null);
-
-                       if (seleccionad!=null)
-                       {
-                           String salida = txt_salida.getText();
-                           FileWriter escritura  = new FileWriter(seleccionad);
-                           for(int i=0;i<salida.length();i++)
-                           {
-                               escritura.write(salida.charAt(i));
-                           }
-                           escritura.close();
-                       }
-                       break;
                    case "promedios.Calificaciones":
                        FileChooser.ExtensionFilter filter2 = new FileChooser.ExtensionFilter("Archivos (*.csv)","*.csv");
                        fc.getExtensionFilters().add(filter2);
                        File seleccionado = fc.showSaveDialog(null);
-                       System.out.println(txt_salida.getText());
+                       //System.out.println(txt_salida.getText());
                        if(seleccionado!=null) {
                            String salida = txt_salida.getText();
                            FileWriter escritura = new FileWriter(seleccionado);
@@ -128,6 +112,27 @@ public class Controller {
                            }
                            escritura.close();
                        }
+                       break;
+                   default:
+                       try{
+                           FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Archivos (*.txt)","*.txt");
+                           fc.getExtensionFilters().add(filter);
+                           File seleccionad = fc.showSaveDialog(null);
+
+                           if (seleccionad!=null)
+                           {
+                               String salida = txt_salida.getText();
+                               FileWriter escritura  = new FileWriter(seleccionad);
+                               for(int i=0;i<salida.length();i++)
+                               {
+                                   escritura.write(salida.charAt(i));
+                               }
+                               escritura.close();
+                           }
+                       }catch (Exception e){
+                           System.out.println(e.toString());
+                       }
+
                        break;
                }
 

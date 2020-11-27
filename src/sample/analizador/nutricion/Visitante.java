@@ -18,11 +18,11 @@ public class Visitante extends AlimentosBaseVisitor {
     @Override public String visitArchivo(AlimentosParser.ArchivoContext ctx) {
 
         String salida = "";
-        Integer cantidad = null;
+        Double cantidad = null;
         String nombre_alimento = null;
-        Pair<String, Integer> dato ;
         Double total_calorias=0.0;
-        Integer calorias = null;
+        Double calorias = null;
+        String missing = "";
         JsonObject plato= null;
 
         try{
@@ -37,40 +37,38 @@ public class Visitante extends AlimentosBaseVisitor {
                 nombre_alimento = nombre_alimento.substring(0, 1).toUpperCase() + nombre_alimento.substring(1);
 
                 if(alimento.cantidad().NUMERO() !=null){
-                    cantidad = Integer.parseInt(alimento.cantidad().NUMERO().getText())*100;
+                    cantidad = Double.parseDouble(alimento.cantidad().NUMERO().getText())*100;
                 }else{
-                    cantidad = Integer.parseInt(alimento.cantidad().gramos().NUMERO().getText());
+                    cantidad = Double.parseDouble(alimento.cantidad().gramos().NUMERO().getText());
                 }
                 for (JsonValue objPlato : obj.values()){
                     plato = (JsonObject) objPlato;
                     JsonValue datos = plato.get(nombre_alimento);
                     if(datos!=null){
-                        calorias = Integer.valueOf(datos.toString());
+                        calorias = Double.valueOf(datos.toString());
                         break;
                     }
 
                 }
 
-                calorias = (cantidad * calorias)/100;
-                total_calorias += calorias;
-                System.out.println("Las calorias de "+nombre_alimento+" son: "+ calorias+ "kcal");
-                //getCalorias(nombre_alimento, cantidad);
+               if(calorias != null){
+                   calorias = (cantidad * calorias)/100;
+                   total_calorias += calorias;
+                   System.out.println("Las calorias de "+nombre_alimento+" son: "+ calorias+ "kcal");
+                   //getCalorias(nombre_alimento, cantidad);
+                   calorias = null;
+               }else{
+                   missing += "No encontrado: "+ nombre_alimento+"\n";
+               }
             }
 
         }catch (Exception e){
             System.out.println(e.toString());
         }
 
-        salida = ("El total de calorias es: "+total_calorias+" kcal");
-
-
+        salida = (missing+"El total de calorias es: "+total_calorias+" kcal");
 
         return salida;
-    }
-
-    public String getCalorias(String nombre, Integer cantidad){
-
-        return "";
     }
 
 

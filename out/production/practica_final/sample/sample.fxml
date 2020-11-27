@@ -32,9 +32,6 @@
                     </items>
                   </Menu>
                  <MenuItem mnemonicParsing="false" onAction="#limpiarEntrada" text="Limpiar datos" />
-                 <MenuItem mnemonicParsing="false" onAction="#guardarCambios" text="Guardar" />
-                 <MenuItem mnemonicParsing="false" onAction="#guardar" text="Guardar Como" />
-
               </items>
            </Menu>
         </menus>
@@ -53,7 +50,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextArea fx:id="txtentrada" layoutX="10.0" layoutY="10.0" prefHeight="458.0" prefWidth="532.0" style="-fx-text-fill: ORANGE; -fx-control-inner-background: BLACK;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TextArea fx:id="txtentrada" layoutX="10.0" layoutY="10.0" prefHeight="556.0" prefWidth="596.0" style="-fx-text-fill: ORANGE; -fx-control-inner-background: BLACK;" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="Franklin Gothic Demi Cond" size="18.0" />
                      </font>
@@ -68,6 +65,11 @@
                         </Lighting>
                      </effect>
                   </TextArea>
+                  <Pane layoutX="14.0" layoutY="555.0" prefHeight="17.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="62.0" text="&lt;Entrada&gt;" />
+                        <Label fx:id="file_path_name" layoutX="62.0" prefHeight="17.0" prefWidth="367.0" />
+                     </children></Pane>
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="335.0">
                <children>
