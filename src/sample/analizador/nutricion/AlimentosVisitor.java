@@ -34,4 +34,10 @@ public interface AlimentosVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitGramos(AlimentosParser.GramosContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AlimentosParser#nombre}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNombre(AlimentosParser.NombreContext ctx);
 }

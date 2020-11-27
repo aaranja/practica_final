@@ -3,11 +3,8 @@ package sample;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javax.swing.*;
@@ -23,6 +20,7 @@ public class Controller {
     @FXML private ChoiceBox<String> choice_grammar;
     @FXML private Menu menu_grammar;
     private final SwingNode swingnode2 = new SwingNode();
+    @FXML private Label file_path_name;
     File seleccionado;
     String nombre_gramatica="carbohidratos.Calorias"; // default
     JTextArea txtConsole = new JTextArea(200,40);
@@ -161,9 +159,9 @@ public class Controller {
             seleccionado = fc.showOpenDialog(null);
             if (seleccionado != null) {
                 String pathFile = seleccionado.getAbsolutePath();
+                file_path_name.setText(pathFile);
                 // get dynamic path
                 folder_path = pathFile.substring(0, pathFile.lastIndexOf('\\')+1);
-
                 // open file and get text data
 
                 FileReader entrada  = new FileReader(pathFile, StandardCharsets.UTF_8);

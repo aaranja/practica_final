@@ -26,12 +26,16 @@ public class Visitante extends AlimentosBaseVisitor {
         JsonObject plato= null;
 
         try{
-            JsonReader rdr = Json.createReader(new FileReader("C:\\Users\\fidxl\\dev\\automatas_2\\practica_final\\src\\sample\\analizador\\nutricion\\alimentos.json"));
+            JsonReader rdr = Json.createReader(new FileReader("src\\sample\\analizador\\nutricion\\alimentos.json"));
             JsonObject obj = rdr.readObject();
 
 
             for(AlimentosParser.AlimentoContext alimento: ctx.alimento()){
-                nombre_alimento = alimento.NOMBRE().getText();
+                /* Conseguir el nombre del alimento y convertir la primera letra en mayúscula y el resto en minúscula*/
+                nombre_alimento = alimento.nombre().getText();
+                nombre_alimento = nombre_alimento.toLowerCase();
+                nombre_alimento = nombre_alimento.substring(0, 1).toUpperCase() + nombre_alimento.substring(1);
+
                 if(alimento.cantidad().NUMERO() !=null){
                     cantidad = Integer.parseInt(alimento.cantidad().NUMERO().getText())*100;
                 }else{
