@@ -35,7 +35,6 @@
     "Papa": 70,
     "Rábano": 11
   },
-
   "Leguminosas y Derivados":{
     "Cacahuate":519,
     "Frijol amarillo":336,
@@ -48,7 +47,6 @@
     "Garbanzo cocido":118,
     "Haba seca":341
   },
-
   "Varios": {
     "Taco de suadero": 269,
     "Cerveza": 303,
@@ -62,16 +60,16 @@
     "Paella normal": 191.20
   },
   "Origen animal": {
-    "Lomo":     109,
-    "Bisteck":    263,
-    "Filete pavo":    135.80,
-    "Carne molida":    160.50,
-    "Chicharron":    530,
-    "Jamon horneado":    95,
-    "Peperoni":  494,
-    "Salami italiano":    407,
-    "Salchicha para asar"    :  447,
-    "Salchicha enlatada" :    99
+    "Lomo": 109,
+    "Bisteck": 263,
+    "Filete pavo": 135.80,
+    "Carne molida": 160.50,
+    "Chicharron": 530,
+    "Jamon horneado": 95,
+    "Peperoni": 494,
+    "Salami italiano": 407,
+    "Salchicha para asar": 447,
+    "Salchicha enlatada": 99
   },
   "Pescados":{
     "Atún en aceite":174.0,
@@ -85,5 +83,4 @@
     "Cazón crudo":106,
     "Charal crudo":88
   }
-
 }

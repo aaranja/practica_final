@@ -1,0 +1,12 @@
+LLAVE_A=1
+LLAVE_C=2
+COMA=3
+CORCH_A=4
+CORCH_C=5
+NUMERO=6
+TEXTO=7
+'{'=1
+'}'=2
+','=3
+'['=4
+']'=5

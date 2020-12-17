@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 public class CargarGramatica extends ClassLoader {
     String path_class = "sample.analizador.";
+
     public String invocarClase(String nombreClase, String nombreMetodo, String path){
         String salida = null;
         try{

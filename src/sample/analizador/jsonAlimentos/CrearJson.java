@@ -1,30 +1,30 @@
-package sample.analizador.promedios;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.ParseCancellationException;
+package sample.analizador.jsonAlimentos;
+
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import sample.analizador.ThrowingErrorListener;
 
-import java.nio.charset.StandardCharsets;
 
-
-public class Calificaciones {
+public class CrearJson {
     ParseTree arbol;
     public String analizar(String path){
         String salida = null;
         try{
-            CharStream input = CharStreams.fromFileName(path, StandardCharsets.UTF_8);
-            CsvLexer lexico = new CsvLexer(input);
+            CharStream input = CharStreams.fromFileName(path);
 
+            CrearJsonLexer lexico = new CrearJsonLexer(input);
+            // cambiar la clase que maneja el error
             lexico.removeErrorListeners();
             lexico.addErrorListener(ThrowingErrorListener.INSTANCE);
 
             CommonTokenStream tokens = new CommonTokenStream(lexico);
-
-            CsvParser sintactico = new CsvParser(tokens);
+            CrearJsonParser sintactico = new CrearJsonParser(tokens);
             sintactico.removeErrorListeners();
             sintactico.addErrorListener(ThrowingErrorListener.INSTANCE);
 
-            this.arbol = sintactico.archivo();
+            this.arbol = sintactico.crear();
             Visitante visitas = new Visitante();
             salida = visitas.visit(arbol).toString();
         }catch(Exception e){
@@ -33,7 +33,5 @@ public class Calificaciones {
         }
         return salida;
     }
+
 }
-
-
-
